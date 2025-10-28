@@ -30,3 +30,15 @@ h1, p {
   position: absolute;
   width: 30px;  /* adjust to your item image size */
 }
+
+#gameArea {
+  position: relative;
+  width: 90vw;      /* use 90% of viewport width */
+  max-width: 500px; /* optional max width */
+  height: 90vw;     /* square area */
+  max-height: 500px;
+  margin: 20px auto;
+  border: 2px solid #333;
+  background-color: #a2d5f2;
+  overflow: hidden;
+}

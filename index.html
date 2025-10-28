@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catch the Falling Items</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Catch the Falling Items!</h1>
+  <p>Score: <span id="score">0</span> | Lives: <span id="lives">3</span></p>
+  <div id="gameArea">
+    <img id="bowl" src="images/bowl.png" alt="Bowl">
+  </div>
+  <script>
+    const gameArea = document.getElementById('gameArea');
+    const bowl = document.getElementById('bowl');
+    const scoreEl = document.getElementById('score');
+    const livesEl = document.getElementById('lives');
+
+    const itemImages = ['images/1.png', 'images/2.png', 'images/3.png']; // list of item images
+
+    let score = 0;
+    let lives = 3;
+    let bowlX = 200;
+    let gameWon = false;
+
+    // Move bowl with mouse
+    gameArea.addEventListener('mousemove', (e) => {
+      if (gameWon) return;
+      const rect = gameArea.getBoundingClientRect();
+      bowlX = e.clientX - rect.left - bowl.offsetWidth / 2;
+      if (bowlX < 0) bowlX = 0;
+      if (bowlX > rect.width - bowl.offsetWidth) bowlX = rect.width - bowl.offsetWidth;
+      bowl.style.left = bowlX + 'px';
+    });
+
+    function createFallingItem() {
+      if (gameWon) return;
+      const item = document.createElement('img');
+
+      // Random image
+      const randomIndex = Math.floor(Math.random() * itemImages.length);
+      item.src = itemImages[randomIndex];
+
+      item.classList.add('item');
+      item.style.left = Math.random() * (gameArea.offsetWidth - 30) + 'px';
+      gameArea.appendChild(item);
+
+      let y = 0;
+      const fallSpeed = 2 + Math.random() * 3;
+
+      const fallInterval = setInterval(() => {
+        y += fallSpeed;
+        item.style.top = y + 'px';
+
+        // Collision with bowl
+        const itemRect = item.getBoundingClientRect();
+        const bowlRect = bowl.getBoundingClientRect();
+        if (
+          itemRect.bottom >= bowlRect.top &&
+          itemRect.left < bowlRect.right &&
+          itemRect.right > bowlRect.left
+        ) {
+          score++;
+          scoreEl.textContent = score;
+          item.remove();
+          clearInterval(fallInterval);
+
+          // Win condition
+          if (score >= 10) {
+            gameWon = true;
+            bowl.src = 'images/bowl_full.png';
+            
+            // Smooth expand to cover game area
+            bowl.style.transition = 'all 1s ease';
+            bowl.style.width = '100%';
+            bowl.style.height = '100%';
+            bowl.style.left = '0';
+            bowl.style.bottom = '0';
+            bowl.style.objectFit = 'cover';
+
+            alert("You Win! Your bowl is full!");
+          }
+        }
+
+        // Missed item
+        if (y > gameArea.offsetHeight) {
+          lives--;
+          livesEl.textContent = lives;
+          item.remove();
+          clearInterval(fallInterval);
+          if (lives <= 0 && !gameWon) {
+            alert("Game Over!");
+            location.reload();
+          }
+        }
+      }, 20);
+    }
+
+    // Create items every 1s
+    setInterval(createFallingItem, 1000);
+  </script>
+</body>
+</html>

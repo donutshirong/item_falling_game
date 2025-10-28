@@ -1,0 +1,32 @@
+body {
+  font-family: 'Bagel Fat One', cursive;
+  text-align: center;
+  background-color: #f0f8ff;
+}
+
+h1, p {
+  font-family: 'Bagel Fat One', cursive; /* apply to headings and paragraph */
+}
+
+/* Keep other styles the same */
+#gameArea {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  margin: 20px auto;
+  border: 2px solid #333;
+  background-color: #a2d5f2;
+  overflow: hidden;
+}
+
+#bowl {
+  position: absolute;
+  bottom: 0;
+  left: 200px;
+  width: 80px;  /* adjust to your bowl image size */
+}
+
+.item {
+  position: absolute;
+  width: 30px;  /* adjust to your item image size */
+}

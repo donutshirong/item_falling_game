@@ -10,7 +10,7 @@
   <h1>Catch the Falling Items!</h1>
   <p>Score: <span id="score">0</span> | Lives: <span id="lives">3</span></p>
   <div id="gameArea">
-    <img id="bowl" src="images/bowl.png" alt="Bowl">
+    <img id="bowl" src="bowl.png" alt="Bowl">
   </div>
   <script>
     const gameArea = document.getElementById('gameArea');
@@ -18,7 +18,7 @@
     const scoreEl = document.getElementById('score');
     const livesEl = document.getElementById('lives');
 
-    const itemImages = ['images/1.png', 'images/2.png', 'images/3.png']; // list of item images
+    const itemImages = ['1.png', '2.png', '3.png']; // list of item images
 
     let score = 0;
     let lives = 3;
@@ -70,7 +70,7 @@
           // Win condition
           if (score >= 10 && !gameWon) {
     gameWon = true;            // Mark game as won
-    bowl.src = 'images/bowl_full.png';
+    bowl.src = 'bowl_full.png';
     
     // Smooth expand to cover game area
     bowl.style.transition = 'all 1s ease';
@@ -107,3 +107,4 @@
   </script>
 </body>
 </html>
+

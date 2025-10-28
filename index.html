@@ -68,20 +68,24 @@
           clearInterval(fallInterval);
 
           // Win condition
-          if (score >= 10) {
-            gameWon = true;
-            bowl.src = 'images/bowl_full.png';
-            
-            // Smooth expand to cover game area
-            bowl.style.transition = 'all 1s ease';
-            bowl.style.width = '100%';
-            bowl.style.height = '100%';
-            bowl.style.left = '0';
-            bowl.style.bottom = '0';
-            bowl.style.objectFit = 'cover';
+         if (score >= 20 && !gameWon) {
+    gameWon = true;            // Mark game as won
+    bowl.src = 'bowl_full.png';
+    
+    // Smooth expand to cover game area
+    bowl.style.transition = 'all 1s ease';
+    bowl.style.width = '100%';
+    bowl.style.height = '100%';
+    bowl.style.left = '0';
+    bowl.style.bottom = '0';
+    bowl.style.objectFit = 'cover';
+    
+    // Show message only once
+    setTimeout(() => {
+        alert("You Win! Your bowl is full!");
+    }, 100); // small delay to allow the image update
+}
 
-            alert("You Win! Your bowl is full!");
-          }
         }
 
         // Missed item
@@ -103,3 +107,4 @@
   </script>
 </body>
 </html>
+

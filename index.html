@@ -68,9 +68,9 @@
           clearInterval(fallInterval);
 
           // Win condition
-         if (score >= 20 && !gameWon) {
+          if (score >= 10 && !gameWon) {
     gameWon = true;            // Mark game as won
-    bowl.src = 'bowl_full.png';
+    bowl.src = 'images/bowl_full.png';
     
     // Smooth expand to cover game area
     bowl.style.transition = 'all 1s ease';
@@ -107,4 +107,3 @@
   </script>
 </body>
 </html>
-
